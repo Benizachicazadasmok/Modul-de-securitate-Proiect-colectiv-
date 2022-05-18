@@ -1,5 +1,6 @@
 <?php include 'includes/sesion_starter.php';?>
 <?php include 'includes/get_users.php';?>
+<?php include 'includes/get_users_permissions.php';?>
  
 <!DOCTYPE html>
 
@@ -14,20 +15,17 @@
 <meta http-equiv="refresh" content="">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link href="css/Sidenav.css" rel="stylesheet">
-<link href="css/Calendar.css" rel="stylesheet">
+<link href="css/sidenav.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
 
-
-
-<script src="js/Sidenav.js"></script>
-<script src="js/Dropdown.js"></script>
-<script src="js/Calendar.js"></script>
-
+<script src="js/sidenav.js"></script>
+<script src="js/dropdown.js"></script>
+<script src="js/select_user.js"></script>
+<script src="js/draggable_box.js"></script>
 
 </head>
 
 <body>
-
 
 <!-- Left menu -->
 <div class="sidenav">
@@ -76,11 +74,6 @@
   <a> <button class="tablinks" onclick="openTab(event, 'Matlab')">Matlab</button></a>
   </div>
 
-
-
-  <a> <button class="tablinks" onclick="openTab(event, 'Test')">Test</button></a>
-
-
 <div class="dropup">
 <button class="dropbtn">
 <img src="img/Profile.png" style=" width:70px; height:60px; position: relative; padding-left: 10px;">
@@ -111,7 +104,23 @@
   <p>Welcome  
   	<?php 
   	echo $_SESSION["Username"]. ".";
-	  ?>
+    ?>
+
+  <!-- tre sa lucrez la asta -->
+  <?php
+  
+ 
+    foreach($users_permissions as $user_permissions){
+      $User_Id = htmlspecialchars($user_permissions['User_Id']);
+      $Permission_Id = htmlspecialchars($user_permissions['Permission_Id']);
+      
+      echo $User_Id . "  ". $Permission_Id;
+
+   }
+  ?>
+
+
+
   </p>
 </div>
 
@@ -229,13 +238,6 @@
   <iframe src="https://www.jdoodle.com/execute-octave-matlab-online/" ></iframe>
 </div>
 
-<div id="Test" class="tabcontent">
-  <h3>Test123</h3>
-  <p>    <div data-pym-src=
-"https://www.jdoodle.com/embed/v0/2IhG?stdin=1&arg=0">
-    </div></p>
-</div>
-
 <div id="admin" class="tabcontent">
 	<h3>Dashboard</h3>
   	<hr><br>
@@ -251,7 +253,7 @@
 	 $_SESSION["Username_of_users"] = $Username_of_users;
 	?>
 
-  	<button onclick="change_user('<?php echo $user ?>')">
+  	<button class="user_button" onclick="select_user('<?php echo $Username_of_users ?>')">
 
   	<?php
 
@@ -261,50 +263,6 @@
   	?>
   	</button>
 
-  	<!-- <?php
-
-  // echo "<form action='index.php' method=post>
-  // <table>
-  // <tr>
-  // <th>User</th>
-  // <th>Group</th>
-  // <th>HTML & Javascript</th>
-  // <th>NodeJS</th>
-  // <th>PHP</th>
-  // <th>SQL</th>
-  // <th>C</th>
-  // <th>C++</th>
-  // <th>C#</th>
-  // <th>Java</th>
-  // <th>Python</th>
-  // <th>CLISP</th>
-  // <th>Prolog</th>
-  // <th>Bash</th>
-  // <th>Matlab</th>
-  // </tr>";
-
-    // echo "<tr>
-    // <th>" . $Username_of_users . "</th>
-    // <th>NUME GRUP</th>
-    // <th><input type='checkbox' name='HTML & Javascript' value='HTML & Javascript'></th>
-    // <th><input type='checkbox' name='NodeJS' value='NodeJS'></th>
-    // <th><input type='checkbox' name='PHP' value='PHP'></th>
-    // <th><input type='checkbox' name='SQL' value='SQL'></th>
-    // <th><input type='checkbox' name='C' value='C'></th>
-    // <th><input type='checkbox' name='C++' value='C++'></th>
-    // <th><input type='checkbox' name='C#' value='C#'></th>
-    // <th><input type='checkbox' name='Java' value='Java'></th>
-    // <th><input type='checkbox' name='Python' value='Python'></th>
-    // <th><input type='checkbox' name='CLISP' value='CLISP'></th>
-    // <th><input type='checkbox' name='Prolog' value='Prolog'></th>
-    // <th><input type='checkbox' name='Bash' value='Bash'></th>
-    // <th><input type='checkbox' name='Matlab' value='Matlab'></th>
-
-
-    // </tr>";
-
-    // echo "</table><div class='give_permissions_button'><button type='submit' name='give_permisions'>Execute actions</button></div></form>";
- ?> -->
 </h3>
 </div>
 
@@ -347,37 +305,6 @@ function openTab(evt, Tab_name) {
   evt.currentTarget.className += " active";
 }
 document.getElementById("defaultOpen").click();
-</script>
-
-<script>
-var global_friend = ""; 
-var global_response = "";
-
-function select_user(Username){
-
-	$.ajax({
-         type:'POST',
-         url: 'includes/get_messages.php',
-         data:{
-         friend : Username
-         },
-         success:function(response){ 
-
-		    console.log(Username);
-		    global_friend = Username;
-			console.log(response);
-
-			$('#main_chat_window').empty();
-			document.getElementById("friend").innerHTML = Username;
-			document.getElementById("main_chat_window").innerHTML = response;
- 		    // refresh(global_friend);
-
- 
-		}
-
-	});
-
-}
 </script>
 
 </body>

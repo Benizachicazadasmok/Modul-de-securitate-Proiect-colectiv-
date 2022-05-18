@@ -6,7 +6,7 @@ function select_user(Username){
 
 	$.ajax({
          type:'POST',
-         url: 'includes/get_messages.php',
+         url: 'includes/allocate_user_permissions.php',
          data:{
          friend : Username
          },
@@ -19,8 +19,6 @@ function select_user(Username){
 			$('#main_chat_window').empty();
 			document.getElementById("friend").innerHTML = Username;
 			document.getElementById("main_chat_window").innerHTML = response;
- 		    // refresh(global_friend);
-
  
 		}
 
