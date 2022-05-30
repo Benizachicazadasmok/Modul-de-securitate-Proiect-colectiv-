@@ -2,24 +2,24 @@
  
 if(isset($_POST['submit'])){
 	
-	$username= $_POST['uname'];
-	$psw= $_POST['psw'];
+	$username= $_POST['username'];
+	$password= $_POST['password'];
 	
 	require_once 'dbh.inc.php';
 	require_once 'functions.inc.php';
 	
-	if (emptyInputLogin($username, $psw) !== false){
+	if (emptyInputLogin($username, $password) == true){
 
-		 header("location: ../Login.php?error=emptyinput");
+		 header("location: ../Login-Sign-up.php?error=emptyinput");
 		exit();
 	}
 	
-	loginUser($conn, $username, $psw);
+	loginUser($conn, $username, $password);
 	
 }
 	else{
 		
-		header("location: ../Login.php");
+		header("location: ../Login-Sign-up.php");
 		exit();
 		
 	}

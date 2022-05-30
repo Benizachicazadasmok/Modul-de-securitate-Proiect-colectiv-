@@ -1,7 +1,7 @@
 <?php
 require_once 'sesion_starter.php';
 require_once 'dbh.inc.php';
-if(isset($_POST['exit'])){
+
 
 		$now = date("Y-m-d H:i:s");
 		//pentru tabela de users
@@ -17,7 +17,7 @@ if(isset($_POST['exit'])){
 
 	session_destroy();
 
-	header("location: ../Login.php");
+	header("location: ../Login-Sign-up.php");
 	exit();
-}
+
 ?>

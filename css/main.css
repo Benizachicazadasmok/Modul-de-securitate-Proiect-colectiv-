@@ -9,22 +9,52 @@
     cursor: pointer;
     width: 30%;
     border-radius: 5px;
-  }
+}
 
 
-  /* Stilizare pentru draggable box */
-  #mydiv {
+/* width */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+
+/* Track */
+
+ ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+
+/* Handle */
+
+ ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 25px;
+}
+
+
+/* Handle on hover */
+
+ ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+/* Stilizare pentru draggable box */
+
+#user_permissions {
     position: absolute;
     z-index: 9;
     background-color: #f1f1f1;
     text-align: center;
     border: 1px solid #d3d3d3;
-  }
-  
-  #mydivheader {
+}
+
+#selected_user {
     padding: 10px;
     cursor: move;
     z-index: 10;
     background-color: #2196F3;
     color: #fff;
-  }
+}
